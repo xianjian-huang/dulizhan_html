@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>VChart Demo</title>
+
+    <!-- 引入 VChart CDN -->
+    <script src="https://unpkg.com/@visactor/vchart/build/index.min.js"></script>
+
+    <style>
+      #chart {
+        width: 600px;
+        height: 400px;
+        margin: 40px auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="chart"></div>
+
+    <script>
+      // CDN 方式需要用 default
+      const VChartConstructor = VChart.default;
+
+      const spec = {
+        type: 'bar',
+        data: [
+          {
+            id: 'barData',
+            values: [
+              { month: 'Mon', sales: 22 },
+              { month: 'Tue', sales: 13 },
+              { month: 'Wed', sales: 25 },
+              { month: 'Thu', sales: 29 },
+              { month: 'Fri', sales: 38 }
+            ]
+          }
+        ],
+        xField: 'month',
+        yField: 'sales'
+      };
+
+      const chart = new VChartConstructor(spec, {
+        dom: 'chart'
+      });
+
+      chart.renderSync();
+    </script>
+  </body>
+</html>
