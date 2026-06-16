@@ -20,32 +20,37 @@
     <div id="chart"></div>
 
     <script>
-      // CDN 方式需要用 default
-      const VChartConstructor = VChart.default;
-
+    const VChartConstructor = VChart.default;
+  
+    async function loadChart() {
+      // 1. 请求 API 数据
+      const res = await fetch('http://34.60.98.141:5001/sales');
+      const data = await res.json();
+  
+      console.log('API数据：', data);
+  
+      // 2. 用 API 数据生成 spec
       const spec = {
         type: 'bar',
         data: [
           {
             id: 'barData',
-            values: [
-              { month: 'Mon', sales: 22 },
-              { month: 'Tue', sales: 13 },
-              { month: 'Wed', sales: 25 },
-              { month: 'Thu', sales: 29 },
-              { month: 'Fri', sales: 38 }
-            ]
+            values: data
           }
         ],
         xField: 'month',
         yField: 'sales'
       };
-
+  
+      // 3. 创建图表
       const chart = new VChartConstructor(spec, {
         dom: 'chart'
       });
-
+  
       chart.renderSync();
-    </script>
+    }
+  
+    loadChart();
+  </script>
   </body>
 </html>
